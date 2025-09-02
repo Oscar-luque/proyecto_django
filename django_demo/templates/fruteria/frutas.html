@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Lista de Frutas</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Origen</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for fruta in frutas %}
+      <tr>
+        <td>{{ fruta.nombre }}</td>
+        <td>{{ fruta.origen }}</td>
+        <td>{{ fruta.precio }}€</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

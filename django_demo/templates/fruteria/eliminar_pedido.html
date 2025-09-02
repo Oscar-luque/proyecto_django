@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Eliminar Pedido</h1>
+  <p>¿Estás seguro de que deseas eliminar el pedido de {{ pedido.cliente.nombre }} de {% for fruta in pedido.frutas.all %}
+                {{ fruta.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %} con un precio de {{ pedido.total }}?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a href="{% url 'fruteria:lista_pedidos' %}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

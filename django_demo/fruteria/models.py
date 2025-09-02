@@ -20,8 +20,10 @@ class Cliente(models.Model):
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    frutas = models.ManyToManyField(Fruta)
     fecha = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=7, decimal_places=2)
 
     def __str__(self):
-        return f"Pedido {self.id} - {self.cliente.nombre}"
+        frutas_nombres = ', '.join([fruta.nombre for fruta in self.frutas.all()])
+        return f"Pedido {self.id} - {self.cliente.nombre} - {frutas_nombres}"
