@@ -1,5 +1,5 @@
 from django import forms
-from .models import Pedido
+from .models import Pedido, Fruta, Cliente
 
 class PedidoForm(forms.ModelForm):
     class Meta:
@@ -13,7 +13,6 @@ class CrearFrutaForm(forms.Form):
     precio = forms.DecimalField(max_digits=5, decimal_places=2)
 
     def save(self):
-        from .models import Fruta
         nueva_fruta = Fruta(
             nombre=self.cleaned_data['nombre'],
             origen=self.cleaned_data['origen'],
@@ -29,7 +28,6 @@ class CrearClienteForm(forms.Form):
     telefono = forms.CharField(max_length=15)
 
     def save(self):
-        from .models import Cliente
         nuevo_cliente = Cliente(
             nombre=self.cleaned_data['nombre'],
             email=self.cleaned_data['email'],
