@@ -25,7 +25,11 @@ def editar_pedido(request, pedido_id):
     pedido = Pedido.objects.get(id=pedido_id)
     form = PedidoForm(request.POST or None, instance=pedido)
     if form.is_valid():
-        form.save()
+        pedido = form.save(commit=False)
+        frutas_seleccionadas = form.cleaned_data['frutas']
+        pedido.total = sum(fruta.precio for fruta in frutas_seleccionadas)
+        pedido.save()
+        form.save_m2m()
         return redirect('fruteria:lista_pedidos')
     return render(request, 'fruteria/editar_pedido.html', {'form': form, 'pedido': pedido})
 
@@ -53,6 +57,10 @@ def crear_cliente(request):
 def crear_pedido(request):
     form = PedidoForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        pedido = form.save(commit=False)
+        frutas_seleccionadas = form.cleaned_data['frutas']
+        pedido.total = sum(fruta.precio for fruta in frutas_seleccionadas)
+        pedido.save()
+        form.save_m2m()
         return redirect('fruteria:lista_pedidos')
     return render(request, 'fruteria/crear_pedido.html', {'form': form})

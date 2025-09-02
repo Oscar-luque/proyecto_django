@@ -4,7 +4,7 @@ from .models import Pedido
 class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ['cliente', 'frutas', 'total']
+        fields = ['cliente', 'frutas']
 
 class CrearFrutaForm(forms.Form):
     nombre = forms.CharField(max_length=100)
@@ -41,4 +41,4 @@ class CrearClienteForm(forms.Form):
 class CrearPedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
-        fields = ['cliente', 'frutas', 'total']
+        fields = ['cliente', 'frutas']
