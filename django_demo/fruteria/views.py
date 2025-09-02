@@ -64,3 +64,6 @@ def crear_pedido(request):
         form.save_m2m()
         return redirect('fruteria:lista_pedidos')
     return render(request, 'fruteria/crear_pedido.html', {'form': form})
+
+def index(request):
+    return render(request, 'base.html')
